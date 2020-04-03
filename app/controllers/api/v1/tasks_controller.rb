@@ -3,4 +3,8 @@ class Api::V1::TasksController < ApplicationController
     @tasks = Task.order(:display_order)
     render json: { tasks: @tasks }
   end
+
+  def moved_tasks
+
+  end
 end
