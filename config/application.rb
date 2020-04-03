@@ -34,6 +34,13 @@ module SampleApp
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    config.middleware.insert_before ActionDispatch::Static, Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', :headers => :any, :methods => [:get, :post, :options, :patch, :delete]
+      end
+    end
+
     # config.action_dispatch.default_headers = {
     #   'Access-Control-Allow-Credentials' => 'true',
     #   # TODO:本番にデプロイする場合は、本番のオリジンを許可するように。developとproductionで分けた方が良さそう
