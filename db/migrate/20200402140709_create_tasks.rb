@@ -3,7 +3,6 @@ class CreateTasks < ActiveRecord::Migration[6.0]
     create_table :tasks do |t|
       t.string :name
       t.integer :status
-      t.date :start_date
       t.date :due_date
       t.integer :display_order
 
