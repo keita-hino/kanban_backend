@@ -3,13 +3,11 @@
 one:
   name: MyString
   status: 1
-  start_date: 2020-04-02
   due_date: 2020-04-02
   display_order: 1
 
 two:
   name: MyString
   status: 1
-  start_date: 2020-04-02
   due_date: 2020-04-02
   display_order: 1
