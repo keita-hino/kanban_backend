@@ -16,7 +16,6 @@
   Task.create(
     name: "タスク#{i}",
     status: status,
-    start_date: "2019/3/#{1 + i}",
     due_date: "2019/3/#{10 + i}",
     display_order: display_order
   )
