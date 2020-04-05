@@ -4,6 +4,25 @@ class Api::V1::TasksController < ApplicationController
     render json: { tasks: @tasks }
   end
 
+  def create
+    ActiveRecord::Base.transaction do
+      # タスク登録
+      task = Task.new(created_tasks_params)
+      task.display_order = 0
+      task.save!
+
+      # タスクのdisplay_orderを更新する
+      tasks = Task.where(status: created_tasks_params[:status])
+      tasks.each do | task |
+        task.display_order += 1
+        task.save!
+      end
+    end
+
+    @tasks = Task.order(:display_order)
+    render json: { tasks: @tasks }
+  end
+
   # タスクの並び順を変更するタスク
   # TODO:リファクタリング
   def moved_tasks
@@ -112,6 +131,16 @@ class Api::V1::TasksController < ApplicationController
       :id,
       :status,
       :display_order
+    )
+  end
+
+  # タスクの作成用パラメータ
+  # @return [Object] params パラメータ
+  def created_tasks_params
+    params.require(:task).permit(
+      :name,
+      :due_date,
+      :status
     )
   end
 
