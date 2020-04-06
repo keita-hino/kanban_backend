@@ -1,0 +1,29 @@
+language: ruby
+rvm: 2.5.1
+dist: trusty
+services: postgresql
+cache: bundler
+before_install:
+  - sudo /etc/init.d/postgresql stop
+  - sudo apt-get update
+  - sudo apt-get purge postgresql-9.1 postgresql-9.2 postgresql-9.3
+  - sudo apt-get install postgresql-9.4
+  - sudo chmod 777 /etc/postgresql/9.4/main/pg_hba.conf
+  - sudo echo "local   all         postgres                          trust" >  /etc/postgresql/9.4/main/pg_hba.conf
+  - sudo echo "local   all         all                               trust" >> /etc/postgresql/9.4/main/pg_hba.conf
+  - sudo echo "host    all         all         127.0.0.1/32          trust" >> /etc/postgresql/9.4/main/pg_hba.conf
+  - sudo echo "host    all         all         ::1/128               trust" >> /etc/postgresql/9.4/main/pg_hba.conf
+  - sudo /etc/init.d/postgresql restart
+  - psql --version
+before_script:
+  - cp config/database.travis.yml config/database.yml
+  - bundle exec rake db:create
+  - bundle exec rake db:migrate
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: U+A4W2mRQ1uJrgfl35Z4F50FxywWFF2oDGdy4go8Qh50xcZ22eavU/wyhgCklBK6uJv2FmyoFZD2DG2YU2PTX35HtDSBYzt1jR7WgsFqoUqY4DTZuaBpLmrItwLShIOyYoOx4c/dnh8L7RjqvIOUg1Bf1xkxtjM9rmQSjMjui4Z6T+6Ahz9Zpe0vwiCC2EudfR2BAl0oQcSKSj07MnagrPCdkemrLlQISUfgeBnKnVCGxEQps0E1coJCrd3yU2y+YVkN2obiDO5D0zKoQad2H0i9VuopWfE7K/s9E0/z+vn5TcbbsiZm+FHSankqoU9AjsOAptnp3ABLdXbP61l5RJQOGWcqq87NINlvlziv4nXljqJS61NWdjHvpTp2B57X7iH+4pRH7eYwxcRnmWxJO9lekZJmM+98P2uNq8XmQV7YaGKLmFGn5g6DMLvrvnuQqvmmGDT67xL/zYtTWfibveZxklfWeg7rruX3OmNz4sb8/tFcqV4pSq79m6oknuuFqR4oQAFsWvGTb45+BJB/7tdz23EMHI0J2w2kUG/jTGbrBo0xkCHoHyzPnaIO+5nF/Te1HLLV7oauEzpNN4eueSOY+peMJAnkNRTuTSf6y+BEcliK5447LIKsSuzo9ST34QnS8ltiuZrDvLNTydyWbUcpDAbt8bljYEHjwjdHdo4=
+  app: kanban-back
+  on:
+    repo: keita-hino/kanban_backend
