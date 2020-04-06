@@ -16,6 +16,7 @@ before_install:
   - sudo /etc/init.d/postgresql restart
   - psql --version
 before_script:
+  - bundler -v
   - cp config/database.travis.yml config/database.yml
   - bundle exec rake db:create
   - bundle exec rake db:migrate
