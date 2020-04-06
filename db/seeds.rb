@@ -15,6 +15,8 @@
 
   Task.create(
     name: "タスク#{i}",
+    detail: "詳細#{i}",
+    priority: 1,
     status: status,
     due_date: "2019/3/#{10 + i}",
     display_order: display_order
