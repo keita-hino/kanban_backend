@@ -1,0 +1,17 @@
+ja:
+  activerecord:
+    attributes:
+      task:
+        name: タスク名
+        status: ステータス
+        due_date: 期限日
+        display_order: 表示順
+        detail: 詳細
+        priority: 優先度
+
+  enums:
+    task:
+      status:
+        unstarted: 未着手
+        in_progress: 着手中
+        done: 完了
