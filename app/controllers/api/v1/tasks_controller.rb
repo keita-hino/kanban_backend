@@ -8,16 +8,27 @@ class Api::V1::TasksController < ApplicationController
   def create
     ActiveRecord::Base.transaction do
       # タスク登録
-      task = Task.new(created_tasks_params)
+      task = Task.new(create_tasks_params)
       task.display_order = 0
       task.save!
 
       # タスクのdisplay_orderを更新する
-      tasks = Task.where(status: created_tasks_params[:status])
+      tasks = Task.where(status: create_tasks_params[:status])
       tasks.each do | task |
         task.display_order += 1
         task.save!
       end
+    end
+
+    @tasks = Task.order(:display_order)
+    render json: { tasks: @tasks }
+  end
+
+  def update
+    ActiveRecord::Base.transaction do
+      task = Task.find(update_tasks_params[:id])
+      task.assign_attributes(update_tasks_params)
+      task.save!
     end
 
     @tasks = Task.order(:display_order)
@@ -137,8 +148,18 @@ class Api::V1::TasksController < ApplicationController
 
   # タスクの作成用パラメータ
   # @return [Object] params パラメータ
-  def created_tasks_params
+  def create_tasks_params
     params.require(:task).permit(
+      :name,
+      :status
+    )
+  end
+
+  # タスクの作成用パラメータ
+  # @return [Object] params パラメータ
+  def update_tasks_params
+    params.require(:task).permit(
+      :id,
       :name,
       :priority,
       :due_date,

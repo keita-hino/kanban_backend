@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       resources :users, only: [:index]
       resources :tasks, only: [:index, :create] do
         collection do
+          patch :update
           patch :moved_tasks
           patch :update_status_task
         end
