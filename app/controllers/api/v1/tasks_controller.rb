@@ -1,7 +1,8 @@
 class Api::V1::TasksController < ApplicationController
   def index
     @tasks = Task.order(:display_order)
-    render json: { tasks: @tasks }
+    @priorities = Task.priorities.keys
+    render json: { tasks: @tasks, priorities: @priorities }
   end
 
   def create
@@ -139,6 +140,7 @@ class Api::V1::TasksController < ApplicationController
   def created_tasks_params
     params.require(:task).permit(
       :name,
+      :priority,
       :due_date,
       :status
     )
