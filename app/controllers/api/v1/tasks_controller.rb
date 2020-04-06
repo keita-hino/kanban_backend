@@ -142,7 +142,8 @@ class Api::V1::TasksController < ApplicationController
       :name,
       :priority,
       :due_date,
-      :status
+      :status,
+      :detail
     )
   end
 
