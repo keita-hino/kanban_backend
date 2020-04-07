@@ -1,0 +1,203 @@
+ja:
+  save: 保存
+  create: 登録
+  update: 編集
+  delete: 削除
+  notification:
+    message:
+      create: 登録が完了しました。
+      edit: 編集が完了しました。
+      save: 保存が完了しました。
+      delete: 削除が完了しました。
+      error: エラーが発生しました。画面を更新してください。
+      session_error: セッション有効期限が切れました。ログインからやり直してください。
+    title:
+      create: 登録完了
+      edit: 編集完了
+      save: 保存完了
+      delete: 削除完了
+      error: エラー
+  errors:
+    format: "%{attribute}%{message}"
+    messages:
+      accepted: に同意してください
+      already_deleted: データが既に削除されています。画面を更新して確認してください。
+      already_updated: データが更新されています。画面を更新して確認してください。
+      bad_request: リクエストが不正です
+      blank: を入力してください
+      blank_select: を選択してください
+      confirmation: と%{attribute}の入力が一致しません
+      empty: を入力してください
+      equal_to: は%{count}にしてください
+      even: は偶数にしてください
+      exclusion: は予約されています
+      forbidden: "アクセス権限がありません。"
+      greater_than: は%{count}より大きい値にしてください
+      greater_than_or_equal_to: は%{count}以上の値にしてください
+      inclusion: は一覧にありません
+      invalid: は不正な値です
+      invalid_date: は正しい日付で入力してください
+      invalid_datetime: は正しい日時で入力してください
+      invalid_date_format: は正しい日付で入力してください。
+      invalid_format: は不正な形式です
+      invalid_range_maximum: は%{limit}以下で入力してください
+      invalid_range_minimum: は%{limit}以上で入力してください
+      invalid_range_over: は%{limit}を超える値で入力してください
+      invalid_range_under: は%{limit}未満で入力してください
+      less_than: は%{count}より小さい値にしてください
+      less_than_or_equal_to: は%{count}以下の値にしてください
+      not_a_number: は数値で入力してください
+      not_an_integer: は整数で入力してください
+      not_found: データが存在しません。画面を更新して確認してください。
+      odd: は奇数にしてください
+      other_than: は%{count}以外の値にしてください
+      present: は入力しないでください
+      required: を入力してください
+      size_too_big: "のサイズが大きすぎます。(%{file_size}以下に設定してください)"
+      size_too_small: "のサイズが小さすぎます。(%{file_size}以上に設定してください)"
+      system_error: サーバーエラーが発生しました。管理者にお問い合わせください。
+      taken: はすでに存在します
+      too_long: は%{count}文字以内で入力してください
+      too_short: は%{count}文字以上で入力してください
+      unauthorized: "ログインしてください"
+      payment_required: "予約されています"
+      method_not_allowed: "無効にされています"
+      uniqueness: ":%{value}は既に登録されています"
+      wrong_length: は%{count}文字で入力してください
+      wrong_size: "のサイズは%{file_size}に設定してください。"
+      half_numeric: "の数値は半角で入力してください。"
+      child_billing_prepared: "で使用されているため、編集できません"
+      unmatches: "が一致していません"
+      image_format_restrictions: "はJPEG, jpg, png のみ使用できます。"
+      image_capacity_limit: "は5MBまで使用できます"
+      duplication: が重複しています
+      select_length: は%{count}つ以上選択してください
+      end_is_past: は期間開始日よりも未来の日付にしてください
+  date:
+    formats:
+      default: "%Y年%m月%d日"
+      long: "%Y年%m月%d日(%a)"
+      short: "%m月%d日"
+      ym: "%Y年%m月"
+      ym_short: "%Y/%m"
+      normal: "%Y/%m/%d"
+      da: "%-d(%a)"
+    abbr_day_names:
+    - 日
+    - 月
+    - 火
+    - 水
+    - 木
+    - 金
+    - 土
+    abbr_month_names:
+    -
+    - 1月
+    - 2月
+    - 3月
+    - 4月
+    - 5月
+    - 6月
+    - 7月
+    - 8月
+    - 9月
+    - 10月
+    - 11月
+    - 12月
+    day_names:
+    - 日曜日
+    - 月曜日
+    - 火曜日
+    - 水曜日
+    - 木曜日
+    - 金曜日
+    - 土曜日
+    month_names:
+    -
+    - 1月
+    - 2月
+    - 3月
+    - 4月
+    - 5月
+    - 6月
+    - 7月
+    - 8月
+    - 9月
+    - 10月
+    - 11月
+    - 12月
+    order:
+    - :year
+    - :month
+    - :day
+  datetime:
+    formats:
+      default: "%Y年%m月%d日 %H:%M:%S"
+      long: "%Y年%m月%d日(%a) %H時%M分%S秒"
+      short: "%Y年%m月%d日 %H:%M"
+      simple_short: "%Y/%m/%d %H:%M"
+    distance_in_words:
+      about_x_hours:
+        one: 約1時間
+        other: 約%{count}時間
+      about_x_months:
+        one: 約1ヶ月
+        other: 約%{count}ヶ月
+      about_x_years:
+        one: 約1年
+        other: 約%{count}年
+      almost_x_years:
+        one: 1年弱
+        other: "%{count}年弱"
+      half_a_minute: 30秒前後
+      less_than_x_minutes:
+        one: 1分以内
+        other: "%{count}分未満"
+      less_than_x_seconds:
+        one: 1秒以内
+        other: "%{count}秒未満"
+      over_x_years:
+        one: 1年以上
+        other: "%{count}年以上"
+      x_days:
+        one: 1日
+        other: "%{count}日"
+      x_minutes:
+        one: 1分
+        other: "%{count}分"
+      x_months:
+        one: 1ヶ月
+        other: "%{count}ヶ月"
+      x_years:
+        one: 1年
+        other: "%{count}年"
+      x_seconds:
+        one: 1秒
+        other: "%{count}秒"
+    prompts:
+      day: 日
+      hour: 時
+      minute: 分
+      month: 月
+      second: 秒
+      year: 年
+  timefield:
+    formats:
+      default: "%H:%M"
+      long: "%H:%M:%S"
+      short: "%H"
+  time:
+    am: 午前
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"
+      long: "%Y年%m月%d日(%a) %H時%M分%S秒 %z"
+      short: "%y/%m/%d %H:%M"
+      time_short: "%H:%M"
+      time_medium: "%H:%M %p"
+    pm: 午後
+  timespan:
+    formats:
+      long: "%{hour}時間%{minutes}分"
+      hour: "%{hour}時間"
+      minutes: "%{minutes}分"
+  or: または
