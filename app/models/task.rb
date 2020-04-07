@@ -1,4 +1,5 @@
 class Task < ApplicationRecord
+
   ##
   # enums
   ##
@@ -16,5 +17,23 @@ class Task < ApplicationRecord
     medium: 2,
     high: 3
   }
+
+  ##
+  # validates
+  ##
+
+  # タスク名
+  validates :name,
+    presence: true,
+    length: { maximum: 100 }
+
+  # 詳細
+  validates :detail,
+    length: { maximum: 200 }
+
+  # 期限日
+  validates :due_date,
+    allow_blank: true,
+    date: { presence: true }
 
 end
