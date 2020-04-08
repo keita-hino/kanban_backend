@@ -1,8 +1,3 @@
-
-# 10.times do |i|
-#   User.create(name: "user#{i}", age: i)
-# end
-
 10.times do |i|
   status = 1
   if i > 3 && i <= 6
