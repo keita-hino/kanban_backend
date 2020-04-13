@@ -13,11 +13,11 @@
 #  current_sign_in_ip     :string
 #  email                  :string
 #  encrypted_password     :string           default(""), not null
+#  first_name             :string(20)       not null
 #  image                  :string
+#  last_name              :string(20)       not null
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :string
-#  name                   :string
-#  nickname               :string
 #  provider               :string           default("email"), not null
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
