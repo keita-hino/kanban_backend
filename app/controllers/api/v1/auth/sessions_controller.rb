@@ -11,12 +11,11 @@ module Api::V1::Auth
     end
 
     def render_create_success
-      # ログインした後のレスポンス
+      # ログイン処理後のレスポンス
       render json: {
         status: "OK",
-        email: @resource.email,
-        last_name: @resource.last_name,
-        first_name: @resource.first_name
+        # 下記でユーザテーブルの中身をハッシュ形式で返すことができる。
+        data: resource_data(resource_json: @resource.token_validation_response)
       }
     end
   end
