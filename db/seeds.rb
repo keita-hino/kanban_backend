@@ -1,3 +1,14 @@
+# ユーザ
+(1..5).each do |i|
+  User.create(
+    email: "test#{i}@example.com",
+    last_name: "hoge",
+    first_name: "ユーザ#{i}",
+    password: "Password1234!"
+  )
+end
+
+# タスク
 10.times do |i|
   status = 1
   if i > 3 && i <= 6

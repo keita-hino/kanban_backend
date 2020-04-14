@@ -27,6 +27,9 @@ gem 'rails-i18n'
 # enumの多言語化
 gem 'enum_help'
 
+gem 'devise'
+gem 'devise_token_auth'
+
 # スキーマ情報を追記
 gem 'annotate'
 
