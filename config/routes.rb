@@ -8,6 +8,14 @@ Rails.application.routes.draw do
         # passwords: 'api/v1/auth/passwords',
         # unlocks: 'api/v1/auth/unlocks'
       }
+      # ユーザー
+      resources :users, only: [] do
+        collection do
+          patch :update
+        end
+      end
+
+      # タスク
       resources :tasks, only: [:index, :create] do
         collection do
           patch :update
