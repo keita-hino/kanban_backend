@@ -31,7 +31,7 @@ gem 'devise'
 gem 'devise_token_auth'
 
 # スキーマ情報を追記
-gem 'annotate'
+# gem 'annotate'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
