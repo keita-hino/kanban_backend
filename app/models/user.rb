@@ -4,4 +4,18 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   include DeviseTokenAuth::Concerns::User
+
+  ##
+  # validates
+  ##
+
+  # 姓
+  validates :last_name,
+    presence: true,
+    length: { maximum: 20 }
+
+  # 名
+  validates :first_name,
+    presence: true,
+    length: { maximum: 20 }
 end
