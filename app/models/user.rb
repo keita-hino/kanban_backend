@@ -6,6 +6,12 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   ##
+  # relations
+  ##
+
+  has_many :workspace_users
+
+  ##
   # validates
   ##
 

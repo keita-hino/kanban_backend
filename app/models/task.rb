@@ -1,6 +1,12 @@
 class Task < ApplicationRecord
 
   ##
+  # relations
+  ##
+
+  belongs_to :workspace
+
+  ##
   # enums
   ##
 
