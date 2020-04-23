@@ -7,41 +7,47 @@ class Api::V1::TasksController < ApplicationController
   end
 
   def create
+    workspace_id = params[:workspace_id]
     ActiveRecord::Base.transaction do
       # タスク登録
       task = Task.new(create_tasks_params)
       task.display_order = 0
+      task.workspace_id = workspace_id
       task.save!
 
       # タスクのdisplay_orderを更新する
-      tasks = Task.where(status: create_tasks_params[:status])
+      tasks = Task.where(status: create_tasks_params[:status]).workspace_id_is(workspace_id)
       tasks.each do | task |
         task.display_order += 1
         task.save!
       end
     end
 
-    @tasks = Task.order(:display_order)
+    @tasks = Task.workspace_id_is(workspace_id).order(:display_order)
     render json: { tasks: @tasks }
   end
 
   def update
+    workspace_id = params[:workspace_id]
     ActiveRecord::Base.transaction do
       task = Task.find(update_tasks_params[:id])
       task.assign_attributes(update_tasks_params)
       task.save!
     end
 
-    @tasks = Task.order(:display_order)
+    @tasks = Task.workspace_id_is(workspace_id).order(:display_order)
     render json: { tasks: @tasks }
   end
 
   # タスクの並び順を変更するタスク
   # TODO:リファクタリング
   def moved_tasks
+    workspace_id = params[:workspace_id]
+
     # 挿入されたタスク直下のタスク
     before_moved_task = Task.where(status: moved_tasks_params[:status])
                             .where(display_order: moved_tasks_params[:display_order])
+                            .workspace_id_is(workspace_id)
                             .order(:display_order)
                             .last
 
@@ -52,6 +58,7 @@ class Api::V1::TasksController < ApplicationController
 
     # 同一ステータスの末尾タスクのID取得
     last_task_id = Task.where(status: moved_tasks_params[:status])
+                       .workspace_id_is(workspace_id)
                        .order(:display_order)
                        .last
                        .id
@@ -63,6 +70,7 @@ class Api::V1::TasksController < ApplicationController
     if !before_moved_task.nil? && before_moved_task&.id != last_task_id
       # 追加したタスクより後のタスク取得
       target_tasks = Task.where(status: moved_tasks_params[:status])
+                         .workspace_id_is(workspace_id)
                          .where('display_order >= ?', target_display_order)
                          .where.not(id: task.id)
                          .order(:display_order)
@@ -83,15 +91,18 @@ class Api::V1::TasksController < ApplicationController
       task.save!
     end
 
-    @tasks = Task.order(:display_order)
+    @tasks = Task.workspace_id_is(workspace_id).order(:display_order)
     render json: { tasks: @tasks }
   end
 
   # ステータス更新用アクション
   # TODO:リファクタリング
   def update_status_task
+    workspace_id = params[:workspace_id]
+
     # 挿入されたタスク直下のタスク
     before_moved_task = Task.where(status: moved_tasks_params[:status])
+                            .workspace_id_is(workspace_id)
                             .where(display_order: moved_tasks_params[:display_order])
                             .order(:display_order)
                             .last
@@ -103,6 +114,7 @@ class Api::V1::TasksController < ApplicationController
 
     # 同一ステータスの末尾タスクのID取得
     last_task_id = Task.where(status: moved_tasks_params[:status])
+                       .workspace_id_is(workspace_id)
                        .order(:display_order)
                        .last
                        .id
@@ -114,6 +126,7 @@ class Api::V1::TasksController < ApplicationController
     if !before_moved_task.nil? && before_moved_task&.id != last_task_id
       # 追加したタスクより後のタスク取得
       target_tasks = Task.where(status: moved_tasks_params[:status])
+                         .workspace_id_is(workspace_id)
                          .where('display_order >= ?', target_display_order)
                          .where.not(id: task.id)
                          .order(:display_order)
@@ -131,7 +144,7 @@ class Api::V1::TasksController < ApplicationController
       task.save!
     end
 
-    @tasks = Task.order(:display_order)
+    @tasks = Task.workspace_id_is(workspace_id).order(:display_order)
     render json: { tasks: @tasks }
   end
 
