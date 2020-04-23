@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   ##
 
   has_many :workspace_users
+  has_many :workspaces, through: :workspace_users, source: :workspace
 
   ##
   # validates
