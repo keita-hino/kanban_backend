@@ -1,6 +1,6 @@
 class Api::V1::TasksController < ApplicationController
   def index
-    @tasks = Task.order(:display_order)
+    @tasks = Task.workspace_id_is(params[:workspace_id]).order(:display_order)
     @statuses = Task.statuses_i18n
     @priorities = Task.priorities.keys
     render json: { tasks: @tasks, priorities: @priorities, statuses: @statuses }

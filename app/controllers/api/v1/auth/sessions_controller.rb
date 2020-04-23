@@ -16,7 +16,7 @@ module Api::V1::Auth
         status: "OK",
         # 下記でユーザテーブルの中身をハッシュ形式で返すことができる。
         data: resource_data(resource_json: @resource.token_validation_response),
-        workspace_id: @resource.workspace_users.first.workspace_id
+        workspace: @resource.workspace_users.first.workspace
       }
     end
   end

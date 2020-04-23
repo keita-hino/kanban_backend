@@ -42,4 +42,13 @@ class Task < ApplicationRecord
     allow_blank: true,
     date: { presence: true }
 
+  ##
+  # scopes
+  ##
+
+  # ワークスペースID_is
+  scope :workspace_id_is, -> (id) {
+    where(workspace_id: id)
+  }
+
 end
