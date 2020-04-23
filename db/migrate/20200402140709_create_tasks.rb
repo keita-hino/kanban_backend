@@ -1,6 +1,7 @@
 class CreateTasks < ActiveRecord::Migration[6.0]
   def change
-    create_table :tasks do |t|
+    create_table :tasks, id: :bigint, unsigned: true do |t|
+      t.integer :workspace_id, null: false
       t.string :name, limit: 100, null: false
       t.string :detail, limit: 200
       t.integer :status

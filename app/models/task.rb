@@ -1,6 +1,12 @@
 class Task < ApplicationRecord
 
   ##
+  # relations
+  ##
+
+  belongs_to :workspace
+
+  ##
   # enums
   ##
 
@@ -35,5 +41,14 @@ class Task < ApplicationRecord
   validates :due_date,
     allow_blank: true,
     date: { presence: true }
+
+  ##
+  # scopes
+  ##
+
+  # ワークスペースID_is
+  scope :workspace_id_is, -> (id) {
+    where(workspace_id: id)
+  }
 
 end
