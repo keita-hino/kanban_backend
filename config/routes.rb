@@ -23,6 +23,10 @@ Rails.application.routes.draw do
           patch :update_status_task
         end
       end
+
+      # ワークスペース
+      resources :workspaces, only: [:index]
+
     end
   end
 end
