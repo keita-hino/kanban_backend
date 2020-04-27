@@ -46,9 +46,29 @@ class Task < ApplicationRecord
   # scopes
   ##
 
+  # not_IDis
+  scope :not_id_is, -> (id) {
+    where.not(id: id)
+  }
+
   # ワークスペースID_is
   scope :workspace_id_is, -> (id) {
     where(workspace_id: id)
+  }
+
+  # ステータス_is
+  scope :status_is, -> (value) {
+    where(status: value)
+  }
+
+  # 表示順_is
+  scope :display_order_is, -> (value) {
+    where(display_order: value)
+  }
+
+  # 表示順_ge
+  scope :display_order_ge, -> (value) {
+    where('display_order >= ?', value)
   }
 
 end

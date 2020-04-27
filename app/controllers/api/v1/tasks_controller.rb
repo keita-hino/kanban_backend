@@ -16,7 +16,7 @@ class Api::V1::TasksController < ApplicationController
       task.save!
 
       # タスクのdisplay_orderを更新する
-      tasks = Task.where(status: create_tasks_params[:status]).workspace_id_is(workspace_id)
+      tasks = Task.status_is(create_tasks_params[:status]).workspace_id_is(workspace_id)
       tasks.each do | task |
         task.display_order += 1
         task.save!
@@ -45,8 +45,8 @@ class Api::V1::TasksController < ApplicationController
     workspace_id = params[:workspace_id]
 
     # 挿入されたタスク直下のタスク
-    before_moved_task = Task.where(status: moved_tasks_params[:status])
-                            .where(display_order: moved_tasks_params[:display_order])
+    before_moved_task = Task.status_is(moved_tasks_params[:status])
+                            .display_order_is(moved_tasks_params[:display_order])
                             .workspace_id_is(workspace_id)
                             .order(:display_order)
                             .last
@@ -57,7 +57,7 @@ class Api::V1::TasksController < ApplicationController
     task.save!
 
     # 同一ステータスの末尾タスクのID取得
-    last_task_id = Task.where(status: moved_tasks_params[:status])
+    last_task_id = Task.status_is(moved_tasks_params[:status])
                        .workspace_id_is(workspace_id)
                        .order(:display_order)
                        .last
@@ -69,10 +69,10 @@ class Api::V1::TasksController < ApplicationController
     # 末尾に追加された場合は更新しない
     if !before_moved_task.nil? && before_moved_task&.id != last_task_id
       # 追加したタスクより後のタスク取得
-      target_tasks = Task.where(status: moved_tasks_params[:status])
+      target_tasks = Task.status_is(moved_tasks_params[:status])
                          .workspace_id_is(workspace_id)
-                         .where('display_order >= ?', target_display_order)
-                         .where.not(id: task.id)
+                         .display_order_ge(target_display_order)
+                         .not_id_is(task.id)
                          .order(:display_order)
 
       # 並び更新
@@ -101,9 +101,9 @@ class Api::V1::TasksController < ApplicationController
     workspace_id = params[:workspace_id]
 
     # 挿入されたタスク直下のタスク
-    before_moved_task = Task.where(status: moved_tasks_params[:status])
+    before_moved_task = Task.status_is(moved_tasks_params[:status])
                             .workspace_id_is(workspace_id)
-                            .where(display_order: moved_tasks_params[:display_order])
+                            .display_order_is(moved_tasks_params[:display_order])
                             .order(:display_order)
                             .last
 
@@ -113,7 +113,7 @@ class Api::V1::TasksController < ApplicationController
     task.save!
 
     # 同一ステータスの末尾タスクのID取得
-    last_task_id = Task.where(status: moved_tasks_params[:status])
+    last_task_id = Task.status_is(moved_tasks_params[:status])
                        .workspace_id_is(workspace_id)
                        .order(:display_order)
                        .last
@@ -125,10 +125,10 @@ class Api::V1::TasksController < ApplicationController
     # 末尾に追加された場合は更新しない
     if !before_moved_task.nil? && before_moved_task&.id != last_task_id
       # 追加したタスクより後のタスク取得
-      target_tasks = Task.where(status: moved_tasks_params[:status])
+      target_tasks = Task.status_is(moved_tasks_params[:status])
                          .workspace_id_is(workspace_id)
-                         .where('display_order >= ?', target_display_order)
-                         .where.not(id: task.id)
+                         .display_order_ge(target_display_order)
+                         .not_id_is(task.id)
                          .order(:display_order)
 
       # 並び更新
