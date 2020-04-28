@@ -42,8 +42,8 @@ class Api::V1::TasksController < ApplicationController
   # タスクの並び順を変更するタスク
   def moved_tasks
     workspace_id = params[:workspace_id]
-    task_mover = TaskMover.new(workspace_id, moved_tasks_params)
-    task_mover.move
+    task_mover = TaskOrderUpdater.new(workspace_id, moved_tasks_params)
+    task_mover.update
 
     @tasks = Task.workspace_id_is(workspace_id).order(:display_order)
     render json: { tasks: @tasks }

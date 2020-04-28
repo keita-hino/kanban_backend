@@ -1,4 +1,4 @@
-class TaskMover
+class TaskOrderUpdater
   # 初期化
   def initialize(workspace_id, moved_tasks_params)
     @workspace_id = workspace_id
@@ -6,7 +6,7 @@ class TaskMover
   end
 
   # タスクの並び順を変更
-  def move
+  def update
     # 挿入されたタスク直下のタスク
     before_moved_task = Task.status_is(@moved_tasks_params[:status])
                             .display_order_is(@moved_tasks_params[:display_order])
