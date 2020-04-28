@@ -71,4 +71,31 @@ class Task < ApplicationRecord
     where('display_order >= ?', value)
   }
 
+  # 該当タスクの直下のタスク取得
+  def self.immediate_task(status, display_order, workspace_id)
+    self.status_is(status)
+        .display_order_is(display_order)
+        .workspace_id_is(workspace_id)
+        .order(:display_order)
+        .last
+  end
+
+  # 同一ステータスの末尾タスクのID取得
+  def self.same_status_last_task_id(status, workspace_id)
+    self.status_is(status)
+        .workspace_id_is(workspace_id)
+        .order(:display_order)
+        .last
+        .id
+  end
+
+  # 後のタスク取得
+  def self.later_tasks(id, status, workspace_id, target_display_order)
+    self.status_is(status)
+        .workspace_id_is(workspace_id)
+        .display_order_ge(target_display_order)
+        .not_id_is(id)
+        .order(:display_order)
+  end
+
 end
