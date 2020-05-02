@@ -25,4 +25,9 @@ class User < ActiveRecord::Base
   validates :first_name,
     presence: true,
     length: { maximum: 20 }
+
+  # メールアドレス
+  validates :email,
+    presence: true,
+    length: { maximum: 256 }
 end
