@@ -1,6 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   def update
-    user = User.find_by_uid(params[:user][:before_uid])
+    user = User.find_by_email(params[:user][:before_email])
     user.assign_attributes(update_users_params)
     user.save!
 
@@ -13,7 +13,7 @@ class Api::V1::UsersController < ApplicationController
   # @return [Object] params パラメータ
   def update_users_params
     params.require(:user).permit(
-      :uid,
+      :email,
       :last_name,
       :first_name,
       :password

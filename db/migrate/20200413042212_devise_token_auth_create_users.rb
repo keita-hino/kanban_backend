@@ -39,7 +39,7 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[6.0]
       t.string :last_name, limit: 20, null: false
       t.string :first_name, limit: 20, null: false
       t.string :image
-      t.string :email
+      t.string :email, limit: 256, null: false
 
       ## Tokens
       t.json :tokens
