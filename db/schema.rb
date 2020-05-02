@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 2020_04_22_111456) do
     t.string "last_name", limit: 20, null: false
     t.string "first_name", limit: 20, null: false
     t.string "image"
-    t.string "email"
+    t.string "email", limit: 256, null: false
     t.json "tokens"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
