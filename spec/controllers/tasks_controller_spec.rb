@@ -37,4 +37,30 @@ RSpec.describe Api::V1::TasksController, type: :controller do
     end
   end
 
+  describe "PATCH #update" do
+    it "タスクの更新" do
+      @task = create(:task)
+      modified_task_name = 'タスク更新'
+
+      task_create_params = {
+        task: {
+          id: @task.id,
+          name: modified_task_name
+        },
+        workspace_id: @task.workspace_id
+      }
+
+      patch :update, params: task_create_params
+
+      json = JSON.parse(response.body)
+
+      # リクエスト成功を表す200が返ってきたか確認する。
+      expect(response.status).to eq(200)
+
+      # タスクが更新されているか
+      expect(Task.find(@task.id).name).to eq(modified_task_name)
+
+    end
+  end
+
 end
