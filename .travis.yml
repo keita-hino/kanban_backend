@@ -15,6 +15,7 @@ before_install:
   - sudo echo "host    all         all         ::1/128               trust" >> /etc/postgresql/9.4/main/pg_hba.conf
   - sudo /etc/init.d/postgresql restart
   - psql --version
+  - gem install bundler -v 2.0.2
 before_script:
   - bundler -v
   - cp config/database.travis.yml config/database.yml
