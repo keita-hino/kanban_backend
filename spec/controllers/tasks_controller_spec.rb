@@ -1,10 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::TasksController, type: :controller do
+    before do
+      @task = create(:task)
+    end
 
   describe "GET #index" do
     it "タスクの一覧を取得" do
-      @task = create(:task)
       create_list(:task, 9, workspace_id: @task.workspace_id)
       get :index, params: { workspace_id: @task.workspace_id }
 
@@ -20,13 +22,11 @@ RSpec.describe Api::V1::TasksController, type: :controller do
 
   describe "POST #create" do
     it "タスクの新規作成" do
-      @workspace = create(:workspace)
-
       task_create_params = {
         task: {
           name: 'タスク'
         },
-        workspace_id: @workspace.id
+        workspace_id: @task.workspace_id
       }
 
       # リクエスト成功を表す200が返ってきたか確認する。
@@ -39,7 +39,6 @@ RSpec.describe Api::V1::TasksController, type: :controller do
 
   describe "PATCH #update" do
     it "タスクの更新" do
-      @task = create(:task)
       modified_task_name = 'タスク更新'
 
       task_create_params = {
