@@ -63,7 +63,6 @@ RSpec.describe Api::V1::TasksController, type: :controller do
     end
   end
 
-  # TODO:明日やる
   describe "PATCH #moved_tasks" do
     it "タスクの並び順更新" do
       change_task = Task.unstarted.second
