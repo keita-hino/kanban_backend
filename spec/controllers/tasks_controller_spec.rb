@@ -1,10 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::TasksController, type: :controller do
+    before do
+      create_list(:task, 10)
+      @task = Task.first
+    end
 
   describe "GET #index" do
     it "タスクの一覧を取得" do
-      @task = create(:task)
       create_list(:task, 9, workspace_id: @task.workspace_id)
       get :index, params: { workspace_id: @task.workspace_id }
 
@@ -20,13 +23,11 @@ RSpec.describe Api::V1::TasksController, type: :controller do
 
   describe "POST #create" do
     it "タスクの新規作成" do
-      @workspace = create(:workspace)
-
       task_create_params = {
         task: {
           name: 'タスク'
         },
-        workspace_id: @workspace.id
+        workspace_id: @task.workspace_id
       }
 
       # リクエスト成功を表す200が返ってきたか確認する。
@@ -39,7 +40,6 @@ RSpec.describe Api::V1::TasksController, type: :controller do
 
   describe "PATCH #update" do
     it "タスクの更新" do
-      @task = create(:task)
       modified_task_name = 'タスク更新'
 
       task_create_params = {
@@ -59,6 +59,33 @@ RSpec.describe Api::V1::TasksController, type: :controller do
 
       # タスクが更新されているか
       expect(Task.find(@task.id).name).to eq(modified_task_name)
+
+    end
+  end
+
+  # TODO:明日やる
+  describe "PATCH #moved_tasks" do
+    it "タスクの並び順更新" do
+      change_task = Task.unstarted.second
+
+      task_moved_params = {
+        task: {
+          id: change_task.id,
+          status: change_task.status,
+          display_order: 1
+        },
+        workspace_id: change_task.workspace_id
+      }
+
+      patch :moved_tasks, params: task_moved_params
+
+      json = JSON.parse(response.body)
+
+      # リクエスト成功を表す200が返ってきたか確認する。
+      expect(response.status).to eq(200)
+
+      # タスクが更新されているか
+      expect(Task.unstarted.order(:display_order).first.id).to eq(change_task.id)
 
     end
   end
