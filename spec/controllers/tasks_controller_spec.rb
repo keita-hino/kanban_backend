@@ -89,4 +89,30 @@ RSpec.describe Api::V1::TasksController, type: :controller do
     end
   end
 
+  describe "PATCH #update_status_task" do
+    it "タスクのステータス更新" do
+      change_task = Task.unstarted.first
+
+      task_status_change_params = {
+        task: {
+          id: change_task.id,
+          status: :in_progress,
+          display_order: 1
+        },
+        workspace_id: change_task.workspace_id
+      }
+
+      patch :update_status_task, params: task_status_change_params
+
+      json = JSON.parse(response.body)
+
+      # リクエスト成功を表す200が返ってきたか確認する。
+      expect(response.status).to eq(200)
+
+      # タスクが更新されているか
+      expect(Task.find(change_task.id).in_progress?).to be_truthy
+
+    end
+  end
+
 end
