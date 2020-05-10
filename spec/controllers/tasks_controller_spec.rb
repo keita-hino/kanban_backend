@@ -8,6 +8,7 @@ RSpec.describe Api::V1::TasksController, type: :controller do
 
   describe "GET #index" do
     it "タスクの一覧を取得" do
+      # ワークスペース作成
       create_list(:task, 9, workspace_id: @task.workspace_id)
       get :index, params: { workspace_id: @task.workspace_id }
 
