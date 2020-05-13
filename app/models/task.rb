@@ -71,6 +71,10 @@ class Task < ApplicationRecord
     where('display_order >= ?', value)
   }
 
+  ##
+  # methods
+  ##
+
   # 該当タスクの直下のタスク取得
   def self.immediate_task(status, display_order, workspace_id)
     self.status_is(status)
