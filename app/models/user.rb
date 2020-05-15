@@ -30,4 +30,13 @@ class User < ActiveRecord::Base
   validates :email,
     presence: true,
     length: { maximum: 256 }
+
+  ##
+  # scopes
+  ##
+
+  # ワークスペース 外部結合
+  scope :with_workspaces, -> {
+    eager_load(:workspaces)
+  }
 end
