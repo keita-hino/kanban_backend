@@ -9,7 +9,7 @@ class Api::V1::TasksController < ApplicationController
   def create
     workspace_id = params[:workspace_id]
     ActiveRecord::Base.transaction do
-      # タスク登録
+      # タスクの登録
       task = Task.new(create_tasks_params)
       task.display_order = 0
       task.workspace_id = workspace_id
