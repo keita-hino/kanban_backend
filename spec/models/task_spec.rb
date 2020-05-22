@@ -1,10 +1,9 @@
 require 'rails_helper'
 
-
 RSpec.describe Task do
   let(:task) { create(:task) }
 
-  context 'バリデーション' do
+  context 'validation' do
     context 'name(タスク名)' do
       it '必須になっていること' do
         task.name = nil
