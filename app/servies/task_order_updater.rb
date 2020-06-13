@@ -6,7 +6,7 @@ class TaskOrderUpdater
   end
 
   # タスクの並び順を変更
-  def update
+  def call
     status = @moved_tasks_params[:status]
     display_order = @moved_tasks_params[:display_order]
 

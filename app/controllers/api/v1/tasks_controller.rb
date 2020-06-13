@@ -42,8 +42,7 @@ class Api::V1::TasksController < ApplicationController
   # タスクの並び順を変更するタスク
   def moved_tasks
     workspace_id = params[:workspace_id]
-    task_mover = TaskOrderUpdater.new(workspace_id, moved_tasks_params)
-    task_mover.update
+    TaskOrderUpdater.new(workspace_id, moved_tasks_params).call
 
     @tasks = Task.workspace_id_is(workspace_id).order(:display_order)
     render json: { tasks: @tasks }
@@ -52,8 +51,7 @@ class Api::V1::TasksController < ApplicationController
   # ステータス更新用アクション
   def update_status_task
     workspace_id = params[:workspace_id]
-    task_status_updater = TaskStatusUpdater.new(workspace_id, moved_tasks_params)
-    task_status_updater.update
+    TaskStatusUpdater.new(workspace_id, moved_tasks_params).call
 
     @tasks = Task.workspace_id_is(workspace_id).order(:display_order)
     render json: { tasks: @tasks }
