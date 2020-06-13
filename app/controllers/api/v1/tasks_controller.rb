@@ -8,20 +8,7 @@ class Api::V1::TasksController < ApplicationController
 
   def create
     workspace_id = params[:workspace_id]
-    ActiveRecord::Base.transaction do
-      # タスクの登録
-      task = Task.new(create_tasks_params)
-      task.display_order = 0
-      task.workspace_id = workspace_id
-      task.save!
-
-      # タスクのdisplay_orderを更新する
-      tasks = Task.status_is(create_tasks_params[:status]).workspace_id_is(workspace_id)
-      tasks.each do | task |
-        task.display_order += 1
-        task.save!
-      end
-    end
+    Task::Creater.new(workspace_id, create_tasks_params).call
 
     @tasks = Task.workspace_id_is(workspace_id).order(:display_order)
     render json: { tasks: @tasks }
