@@ -5,7 +5,7 @@ class TaskStatusUpdater
     @moved_tasks_params = moved_tasks_params
   end
 
-  def update
+  def call
     status = @moved_tasks_params[:status]
     display_order = @moved_tasks_params[:display_order]
 
