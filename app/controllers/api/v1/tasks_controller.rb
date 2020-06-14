@@ -16,11 +16,7 @@ class Api::V1::TasksController < ApplicationController
 
   def update
     workspace_id = params[:workspace_id]
-    ActiveRecord::Base.transaction do
-      task = Task.find(update_tasks_params[:id])
-      task.assign_attributes(update_tasks_params)
-      task.save!
-    end
+    Task::Updater.new(workspace_id, update_tasks_params).call
 
     @tasks = Task.workspace_id_is(workspace_id).order(:display_order)
     render json: { tasks: @tasks }
