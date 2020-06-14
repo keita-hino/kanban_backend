@@ -1,0 +1,19 @@
+inherit_from: .rubocop_todo.yml
+
+# 日本語でのコメントを許可
+AsciiComments:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*.rb
+
+Layout/LineLength:
+  Max: 150
+
+Metrics/MethodLength:
+  CountComments: false
+  Max: 19
+
+Style/Documentation:
+  Enabled: false
