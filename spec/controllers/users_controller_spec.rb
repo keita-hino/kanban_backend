@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Api::V1::UsersController, type: :controller do
-  let(:user){ create(:user) }
-  let(:modified_last_name){ '変更後hoge' }
-  let(:params){
+  let(:user) { create(:user) }
+  let(:modified_last_name) { '変更後hoge' }
+  let(:params) do
     {
       user: {
         id: user.id,
@@ -11,10 +13,10 @@ RSpec.describe Api::V1::UsersController, type: :controller do
         before_email: user.email
       }
     }
-  }
+  end
 
-  describe "PATCH #update" do
-    it "ユーザの更新" do
+  describe 'PATCH #update' do
+    it 'ユーザの更新' do
       patch :update, params: params
 
       # リクエスト成功を表す200が返ってきたか確認する。
@@ -24,5 +26,4 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       expect(User.find(user.id).last_name).to eq(modified_last_name)
     end
   end
-
 end
