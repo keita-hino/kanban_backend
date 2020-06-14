@@ -1,17 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::TasksController, type: :controller do
-    before do
-      create_list(:task, 10)
-      @task = Task.first
-    end
+  before do
+    create_list(:task, 10)
+    @task = Task.first
+  end
 
   describe "GET #index" do
-    it "タスクの一覧を取得" do
+    before do
       # ワークスペース作成
       create_list(:task, 9, workspace_id: @task.workspace_id)
       get :index, params: { workspace_id: @task.workspace_id }
+    end
 
+    it "タスクの一覧を取得" do
       json = JSON.parse(response.body)
 
       # リクエスト成功を表す200が返ってきたか確認する。
