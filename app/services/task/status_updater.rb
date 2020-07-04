@@ -1,4 +1,4 @@
-class TaskStatusUpdater
+class Task::StatusUpdater
   # 初期化
   def initialize(workspace_id, moved_tasks_params)
     @workspace_id = workspace_id

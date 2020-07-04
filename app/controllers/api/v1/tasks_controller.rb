@@ -29,7 +29,7 @@ module Api
       # タスクの並び順を変更するタスク
       def moved_tasks
         workspace_id = params[:workspace_id]
-        TaskOrderUpdater.new(workspace_id, moved_tasks_params).call
+        Task::OrderUpdater.new(workspace_id, moved_tasks_params).call
 
         @tasks = Task.workspace_id_is(workspace_id).order(:display_order)
         render json: { tasks: @tasks }
@@ -38,7 +38,7 @@ module Api
       # ステータス更新用アクション
       def update_status_task
         workspace_id = params[:workspace_id]
-        TaskStatusUpdater.new(workspace_id, moved_tasks_params).call
+        Task::StatusUpdater.new(workspace_id, moved_tasks_params).call
 
         @tasks = Task.workspace_id_is(workspace_id).order(:display_order)
         render json: { tasks: @tasks }
