@@ -38,7 +38,11 @@ module Api
       # ステータス更新用アクション
       def update_status_task
         workspace_id = params[:workspace_id]
-        Task::StatusUpdater.new(workspace_id, moved_tasks_params).call
+        id = moved_tasks_params[:id]
+        status = moved_tasks_params[:status]
+        display_order = moved_tasks_params[:display_order]
+
+        Task::StatusUpdater.new(id, workspace_id, status, display_order).call
 
         @tasks = Task.workspace_id_is(workspace_id).order(:display_order)
         render json: { tasks: @tasks }
