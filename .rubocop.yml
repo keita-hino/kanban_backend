@@ -8,6 +8,10 @@ Metrics/BlockLength:
   Exclude:
     - spec/**/*.rb
 
+# A(ssignment), B(ranch) and C(ondition)のメトリクス。
+Metrics/AbcSize:
+  Max: 35
+
 Layout/LineLength:
   Max: 150
 
