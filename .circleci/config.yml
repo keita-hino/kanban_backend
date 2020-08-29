@@ -8,6 +8,7 @@ jobs:
       - image: circleci/ruby:2.7.1
         environment:
           - BUNDLER_VERSION: 2.1.4
+          - RAILS_ENV: 'test'
     executor: ruby/default
     steps:
       - checkout
@@ -19,6 +20,11 @@ jobs:
       - run:
           name: Which bundler?
           command: bundle -v
+      - run:
+          name: DB migrate
+          command: |
+            rails db:create
+            rails db:migrate
       - ruby/bundle-install
       - run:
           name: exec rspec 
