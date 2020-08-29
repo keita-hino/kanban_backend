@@ -20,12 +20,12 @@ jobs:
       - run:
           name: Which bundler?
           command: bundle -v
+      - ruby/bundle-install
       - run:
           name: DB migrate
           command: |
             rails db:create
             rails db:migrate
-      - ruby/bundle-install
       - run:
           name: exec rspec 
           command: bundle exec rspec
