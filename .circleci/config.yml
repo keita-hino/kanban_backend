@@ -16,7 +16,7 @@ jobs:
           name: install dependencies
           command: |
             gem install bundler -v 2.0.2
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
+            bundle install --jobs=4 --retry=3
       - run:
           name: Which bundler?
           command: bundle -v
@@ -28,4 +28,4 @@ jobs:
             rails db:migrate
       - run:
           name: exec rspec 
-          command: bundle exec rspec
+          command: bundle exec rspec 
