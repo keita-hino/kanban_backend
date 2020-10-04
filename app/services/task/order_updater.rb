@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Task::OrderUpdater
+class Task::OrderUpdater < Task::Base
   attr_accessor :workspace_id, :id, :status, :display_order, :moved_tasks_params
 
   def initialize(workspace_id, moved_tasks_params)
@@ -25,16 +25,6 @@ class Task::OrderUpdater
   end
 
   private
-
-  def before_moved_task
-    @before_moved_task ||= Task.immediate_task(status, display_order, workspace_id)
-  end
-
-  def add_end_task?
-    # 同一ステータスの末尾タスクのID取得
-    last_task_id = Task.same_status_last_task_id(status, workspace_id)
-    !before_moved_task.nil? && before_moved_task&.id != last_task_id
-  end
 
   def update_order_task(task)
     # 先頭のタスクだった場合は新たに作成したdisplay_order
