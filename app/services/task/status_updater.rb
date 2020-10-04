@@ -40,8 +40,7 @@ class Task::StatusUpdater < Task::Base
       end
     else
       # 末尾にタスクが追加された場合は追加したタスクのdisplay_orderをインクリメントする
-      task.display_order += 1
-      task.save!
+      task.increase_display_order
     end
   end
 end

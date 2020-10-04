@@ -102,4 +102,15 @@ class Task < ApplicationRecord
         .order(:display_order)
   end
 
+  # display_orderをインクリメントする
+  def increase_display_order
+    self.display_order += 1
+    self.save!
+  end
+
+  # display_orderをデクリメントする
+  def decrease_display_order
+    self.display_order -= 1
+    self.save!
+  end
 end
