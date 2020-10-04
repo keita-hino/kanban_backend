@@ -42,12 +42,10 @@ class Task::OrderUpdater < Task::Base
       end
 
       # 移動前と移動後の間にあるタスクを繰り上げ
-      before_moved_task.display_order -= 1
-      before_moved_task.save!
+      task.decrease_display_order
     else
       # 末尾にタスクが追加された場合は追加したタスクのdisplay_orderをインクリメントする
-      task.display_order += 1
-      task.save!
+      task.increase_display_order
     end
   end
 end
