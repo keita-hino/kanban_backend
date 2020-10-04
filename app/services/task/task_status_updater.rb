@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class TaskStatusUpdater
+class Task::TaskStatusUpdater
   attr_reader :id, :workspace_id, :status, :display_order
 
   # 初期化
