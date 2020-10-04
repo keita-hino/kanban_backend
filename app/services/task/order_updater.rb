@@ -1,31 +1,32 @@
 # frozen_string_literal: true
 
-class TaskStatusUpdater
-  include Concerns::TaskUtility
-  attr_reader :id, :workspace_id, :status, :display_order
+class Task::OrderUpdater < Task::Base
+  attr_accessor :workspace_id, :id, :status, :display_order, :moved_tasks_params
 
-  def initialize(id, workspace_id, status, display_order)
-    @id = id
+  def initialize(workspace_id, moved_tasks_params)
     @workspace_id = workspace_id
-    @status = status
-    @display_order = display_order
+    @id = moved_tasks_params[:id]
+    @status = moved_tasks_params[:status]
+    @display_order = moved_tasks_params[:display_order]
+    @moved_tasks_params = moved_tasks_params
   end
 
+  # タスクの並び順を変更
   def call
     ActiveRecord::Base.transaction do
       # タスクステータス更新処理
       task = Task.find(id)
-      task.status = status
+      task.assign_attributes(moved_tasks_params)
       task.save!
 
-      update_task_status(task)
+      # タスクの並び順更新
+      update_order_task(task)
     end
   end
 
   private
 
-  # タスクのステータスを更新
-  def update_task_status(task)
+  def update_order_task(task)
     # 先頭のタスクだった場合は新たに作成したdisplay_order
     target_display_order = before_moved_task.nil? ? task.display_order : before_moved_task.display_order
 
@@ -39,6 +40,10 @@ class TaskStatusUpdater
         target_task.display_order = task.display_order + index
         target_task.save!
       end
+
+      # 移動前と移動後の間にあるタスクを繰り上げ
+      before_moved_task.display_order -= 1
+      before_moved_task.save!
     else
       # 末尾にタスクが追加された場合は追加したタスクのdisplay_orderをインクリメントする
       task.display_order += 1
