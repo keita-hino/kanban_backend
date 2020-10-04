@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-class Task::StatusUpdater
+class TaskStatusUpdater
+  include Concerns::TaskUtility
   attr_reader :id, :workspace_id, :status, :display_order
 
-  # 初期化
   def initialize(id, workspace_id, status, display_order)
     @id = id
     @workspace_id = workspace_id
@@ -23,20 +23,6 @@ class Task::StatusUpdater
   end
 
   private
-
-  # 挿入されたタスク直下のタスク
-  def before_moved_task
-    @before_moved_task ||= Task.immediate_task(status, display_order, workspace_id)
-  end
-
-  # 末尾タスクのIDを取得
-  def last_task_id
-    @last_task_id ||= Task.same_status_last_task_id(status, workspace_id)
-  end
-
-  def add_end_task?
-    !before_moved_task.nil? && before_moved_task&.id != last_task_id
-  end
 
   # タスクのステータスを更新
   def update_task_status(task)
