@@ -45,6 +45,7 @@ module SampleApp
     config.active_record.default_timezone = :local
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :ja
+    config.autoloader = :classic
 
     # config.action_dispatch.default_headers = {
     #   'Access-Control-Allow-Credentials' => 'true',
