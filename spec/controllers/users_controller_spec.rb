@@ -23,7 +23,12 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       expect(response.status).to eq(200)
 
       # タスクが更新されているか
-      expect(User.find(user.id).last_name).to eq(modified_last_name)
+      expect(response.body).to be_json_including(
+        user: {
+          'id' => user.id,
+          'last_name' => modified_last_name
+        }
+      )
     end
   end
 end
