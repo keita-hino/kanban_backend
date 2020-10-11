@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'rspec/json_matcher'
+RSpec.configuration.include RSpec::JsonMatcher
+
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
