@@ -42,7 +42,7 @@ jobs:
             docker-compose run --rm web rake db:create
             docker-compose run --rm web rails db:migrate
       - run:
-          name: docker-compose up
+          name: docker-compose
           command: docker-compose up -d
       - run:
           name: Run rspec
