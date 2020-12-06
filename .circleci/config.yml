@@ -65,9 +65,9 @@ workflows:
   production_deploy:
     jobs:
       - test
-          filters:
-            branches:
-              only: master
+        filters:
+          branches:
+            only: master
       - deploy-prod:
           requires:
             - test
