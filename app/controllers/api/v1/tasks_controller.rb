@@ -7,7 +7,8 @@ module Api
         @tasks = Task.workspace_id_is(params[:workspace_id]).order(:display_order)
         @statuses = Task.statuses_i18n
         @priorities = Task.priorities.keys
-        render json: { tasks: @tasks, priorities: @priorities, statuses: @statuses }
+        render json: { tasks: @tasks.first, priorities: @priorities, statuses: @statuses }
+        return
       end
 
       def create
