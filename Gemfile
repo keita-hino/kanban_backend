@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.1'
+ruby '3.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '6.0.3.3'
+gem 'rails', '6.1.0'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
@@ -28,7 +28,8 @@ gem 'rails-i18n'
 gem 'enum_help'
 
 gem 'devise'
-gem 'devise_token_auth'
+# devise_token_auth がrails 6.1に対応しているバージョンをリリースしていないため、直接指定するように
+gem 'devise_token_auth', git: 'https://github.com/lynndylanhurley/devise_token_auth.git', branch: 'master'
 
 # スキーマ情報を追記
 # gem 'annotate'
