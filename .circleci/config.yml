@@ -39,7 +39,7 @@ jobs:
       - run:
           name: DB migrate
           command: |
-            docker-compose run --rm web rake db:create
+            docker-compose run --rm web rails db:create
             docker-compose run --rm web rails db:migrate
       - run:
           name: docker-compose
