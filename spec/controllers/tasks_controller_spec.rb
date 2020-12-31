@@ -22,7 +22,7 @@ RSpec.describe Api::V1::TasksController, type: :controller do
       expect(response.status).to eq(200)
 
       # タスクの一覧を取得できるか
-      expect(json['tasks'].length).to eq(10)
+      expect(json['tasks'].length).to eq(11)
     end
   end
 
