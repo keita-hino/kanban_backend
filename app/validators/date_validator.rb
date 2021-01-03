@@ -18,7 +18,7 @@ class DateValidator < ActiveModel::EachValidator
     begin
       (y, m, d) = value.split('-')
       Time.zone.local(y, m, d, 0, 0, 0)
-    rescue
+    rescue StandardError
       record.errors[attribute] << I18n.t('errors.messages.invalid_date')
     end
   end

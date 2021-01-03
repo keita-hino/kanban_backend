@@ -51,14 +51,6 @@ Style/ClassAndModuleChildren:
     - 'app/services/task/status_updater.rb'
     - 'app/services/task/updater.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: implicit, explicit
-Style/RescueStandardError:
-  Exclude:
-    - 'app/validators/date_validator.rb'
-
 # Offense count: 3
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, ConsistentQuotesInMultiline.
