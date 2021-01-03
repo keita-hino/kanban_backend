@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -18,18 +20,18 @@ class User < ActiveRecord::Base
 
   # 姓
   validates :last_name,
-    presence: true,
-    length: { maximum: 20 }
+            presence: true,
+            length: { maximum: 20 }
 
   # 名
   validates :first_name,
-    presence: true,
-    length: { maximum: 20 }
+            presence: true,
+            length: { maximum: 20 }
 
   # メールアドレス
   validates :email,
-    presence: true,
-    length: { maximum: 256 }
+            presence: true,
+            length: { maximum: 256 }
 
   ##
   # scopes

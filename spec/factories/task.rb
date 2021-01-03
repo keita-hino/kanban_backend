@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :task do
     association :workspace
@@ -5,7 +7,7 @@ FactoryBot.define do
     detail { 'detail' }
     status { 'unstarted' }
     priority { 'low' }
-    sequence(:display_order){ |n| n + 1 }
+    sequence(:display_order) { |n| n + 1 }
     due_date { Time.now }
   end
 end

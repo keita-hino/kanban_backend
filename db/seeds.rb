@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 # ワークスペース
 # workspace1 = Workspace.create!(name: 'ワークスペース1', image_url: 'sample1.jpg')
 # workspace2 = Workspace.create!(name: 'ワークスペース2', image_url: 'sample2.jpg')
 users = (1..5).map do |i|
   User.create!(
     email: "test#{i}@example.com",
-    last_name: "hoge",
+    last_name: 'hoge',
     first_name: "ユーザ#{i}",
-    password: "Password1234!"
+    password: 'Password1234!'
   )
 end
 
-(1..2).each.with_index(1) do |i|
+(1..2).each do |i|
   # ワークスペース
   workspace = Workspace.create!(name: "ワークスペース#{i}", image_url: "sample#{i}.jpg")
 
@@ -44,5 +46,4 @@ end
       display_order: display_order
     )
   end
-
 end

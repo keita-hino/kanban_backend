@@ -1,62 +1,21 @@
 inherit_from: .rubocop_todo.yml
 
-# 日本語でのコメントを許可
-AsciiComments:
-  Enabled: false
-
-Metrics/BlockLength:
+# rubocopの動作全体に関わる設定
+AllCops:
   Exclude:
-    - spec/**/*.rb
+    - 'bin/**/*' # 自動的に生成されるので除外する
+    - 'config/**/*'
+    - 'db/migrate/**/*'
+    - 'db/schema.rb' # 自動的に生成されるので除外する
+    - 'public/**/*'
+    - 'tmp/**/*'
+    - '.tmp/**/*'
+    - 'vendor/**/*'
+    - 'Gemfile'
 
-# A(ssignment), B(ranch) and C(ondition)のメトリクス。
-Metrics/AbcSize:
-  Max: 35
-
-Layout/LineLength:
-  Max: 150
-
-Metrics/MethodLength:
-  CountComments: false
-  Max: 19
-
+# ドキュメントの無い public class を許可する
 Style/Documentation:
   Enabled: false
 
-Layout/EmptyLinesAroundAttributeAccessor:
-  Enabled: true
-
-Layout/SpaceAroundMethodCallOperator:
-  Enabled: true
-
-Lint/DeprecatedOpenSSLConstant:
-  Enabled: true
-
-Lint/MixedRegexpCaptureTypes:
-  Enabled: true
-
-Lint/RaiseException:
-  Enabled: true
-
-Lint/StructNewOverride:
-  Enabled: true
-
-Style/ExponentialNotation:
-  Enabled: true
-
-Style/HashEachMethods:
-  Enabled: true
-
-Style/HashTransformKeys:
-  Enabled: true
-
-Style/HashTransformValues:
-  Enabled: true
-
-Style/RedundantRegexpCharacterClass:
-  Enabled: true
-
-Style/RedundantRegexpEscape:
-  Enabled: true
-
-Style/SlicingWithRange:
-  Enabled: true
+Style/Lambda:
+  Enabled: false
