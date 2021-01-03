@@ -12,12 +12,6 @@ Lint/MissingSuper:
     - 'app/services/task/order_updater.rb'
     - 'app/services/task/status_updater.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Lint/RedundantWithIndex:
-  Exclude:
-    - 'db/seeds.rb'
-
 # Offense count: 2
 Lint/ShadowingOuterLocalVariable:
   Exclude:

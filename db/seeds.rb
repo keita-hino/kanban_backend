@@ -10,7 +10,7 @@ users = (1..5).map do |i|
   )
 end
 
-(1..2).each.with_index(1) do |i|
+(1..2).each do |i|
   # ワークスペース
   workspace = Workspace.create!(name: "ワークスペース#{i}", image_url: "sample#{i}.jpg")
 
