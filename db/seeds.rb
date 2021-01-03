@@ -6,9 +6,9 @@
 users = (1..5).map do |i|
   User.create!(
     email: "test#{i}@example.com",
-    last_name: "hoge",
+    last_name: 'hoge',
     first_name: "ユーザ#{i}",
-    password: "Password1234!"
+    password: 'Password1234!'
   )
 end
 
