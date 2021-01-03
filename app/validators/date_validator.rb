@@ -13,7 +13,7 @@ class DateValidator < ActiveModel::EachValidator
 
     value = value.to_s unless value.is_a?(String)
     value = value.gsub('/', '-')
-    record.errors[attribute] << I18n.t('errors.messages.invalid_date') unless /\A\d{1,4}\-\d{1,2}\-\d{1,2}\Z/ =~ value
+    record.errors[attribute] << I18n.t('errors.messages.invalid_date') unless /\A\d{1,4}-\d{1,2}-\d{1,2}\Z/ =~ value
 
     begin
       (y, m, d) = value.split('-')
