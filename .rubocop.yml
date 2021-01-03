@@ -16,3 +16,6 @@ AllCops:
 # ドキュメントの無い public class を許可する
 Style/Documentation:
   Enabled: false
+
+Style/Lambda:
+  Enabled: false
