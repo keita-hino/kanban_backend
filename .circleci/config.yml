@@ -1,26 +1,11 @@
-# Ruby CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-ruby/ for more details
-#
-version: 2
-jobs:
-  test:
+version: 2.1
+executors:
+  default:
     machine:
       image: circleci/classic:edge
-    working_directory: ~/repo
+commands:
+  bundle_install:
     steps:
-      - checkout
-      - run:
-          name: Install Docker Compose
-          command: |
-            curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
-            chmod +x ~/docker-compose
-            sudo mv ~/docker-compose /usr/local/bin/docker-compose
-      - run:
-          name: docker-compose build
-          command: |
-            set -x
-            docker-compose build
       # Bundlerのキャッシュを取得
       - restore_cache:
           keys:
@@ -36,6 +21,24 @@ jobs:
           key: rails-bundler-v1-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
+jobs:
+  test:
+    executor: default
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Install Docker Compose
+          command: |
+            curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+            chmod +x ~/docker-compose
+            sudo mv ~/docker-compose /usr/local/bin/docker-compose
+      - run:
+          name: docker-compose build
+          command: |
+            set -x
+            docker-compose build
+      - bundle_install
       - run:
           name: DB migrate
           command: |
@@ -48,8 +51,7 @@ jobs:
           name: Run rspec
           command: docker-compose run --rm web bundle exec rspec
   deploy-prod:
-    machine:
-      image: circleci/classic:edge
+    executor: default
     steps:
       - checkout
       - run:
