@@ -17,7 +17,7 @@ class Task::Creater
 
       # タスクのdisplay_orderを更新する
       tasks = Task.status_is(params[:status]).workspace_id_is(workspace_id)
-      tasks.each do | task |
+      tasks.each do |task|
         task.display_order += 1
         task.save!
       end
