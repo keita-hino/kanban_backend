@@ -1,6 +1,5 @@
 class DateValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
-
     # 日付型は不正な値を入れるとnilになり date: { allow_blank: true } としてもバリデーションが走らない
     # そのための対策としてオプションに presence: true を入れる事で対応
     # return if options[:presence].blank? || options[:presence] == false
