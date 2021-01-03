@@ -23,5 +23,4 @@ class Task::Creater
       end
     end
   end
-
 end

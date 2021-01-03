@@ -14,5 +14,4 @@ class Task::Updater
       task.save!
     end
   end
-
 end
