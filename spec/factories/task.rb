@@ -5,7 +5,7 @@ FactoryBot.define do
     detail { 'detail' }
     status { 'unstarted' }
     priority { 'low' }
-    sequence(:display_order){ |n| n + 1 }
+    sequence(:display_order) { |n| n + 1 }
     due_date { Time.now }
   end
 end
