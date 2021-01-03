@@ -51,13 +51,6 @@ Style/ClassAndModuleChildren:
     - 'app/services/task/status_updater.rb'
     - 'app/services/task/updater.rb'
 
-# Offense count: 18
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: always, always_true, never
-Style/FrozenStringLiteralComment:
-  Enabled: false
-
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.

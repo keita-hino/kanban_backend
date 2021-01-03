@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DateValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     # 日付型は不正な値を入れるとnilになり date: { allow_blank: true } としてもバリデーションが走らない

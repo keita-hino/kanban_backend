@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Task::Creater
   attr_reader :workspace_id, :params
 

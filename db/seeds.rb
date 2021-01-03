@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # ワークスペース
 # workspace1 = Workspace.create!(name: 'ワークスペース1', image_url: 'sample1.jpg')
 # workspace2 = Workspace.create!(name: 'ワークスペース2', image_url: 'sample2.jpg')
