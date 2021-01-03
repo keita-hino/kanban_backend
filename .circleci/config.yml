@@ -1,4 +1,8 @@
 version: 2.1
+executors:
+  default:
+    machine:
+      image: circleci/classic:edge
 commands:
   bundle_install:
     steps:
@@ -19,8 +23,7 @@ commands:
             - vendor/bundle
 jobs:
   test:
-    machine:
-      image: circleci/classic:edge
+    executor: default
     working_directory: ~/repo
     steps:
       - checkout
@@ -48,8 +51,7 @@ jobs:
           name: Run rspec
           command: docker-compose run --rm web bundle exec rspec
   deploy-prod:
-    machine:
-      image: circleci/classic:edge
+    executor: default
     steps:
       - checkout
       - run:
