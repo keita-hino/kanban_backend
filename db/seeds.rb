@@ -44,5 +44,4 @@ end
       display_order: display_order
     )
   end
-
 end
