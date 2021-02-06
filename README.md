@@ -7,6 +7,6 @@
 ## front
 ライブラリ：Vue.js  
 環境：Netlify  
-https://github.com/keita-hino/kanban_front
+https://github.com/keita-hino/kanban_front_ts
 
   
